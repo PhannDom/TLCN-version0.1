@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Product List</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+    body {
+        margin-top: 0%;
+        margin-bottom: 10%;
+        margin-left: 8%;
+        margin-right: 15%;
+    }
+    
+    .none { display:none; }
+</style>
+<body>
+<body>
+    <div class="page-header">
+        <h1>Product List</h1>
+    </div>
+    <div class="container">
+        <form class="form-group" action="/productlist" method="GET">
+
+            <div class="col-sm-3">
+                <div id="sname">Name: <input type="text" class="form-control" id="search" placeholder="Search" name="name"></div>
+                <div id="sprice">Min: <input type="number" class="form-control" id="search" placeholder='Min Price' name="min">
+                Max: <input type="number" class="form-control" id="search" placeholder='Max Price' name="max"></div>
+            </div>
+            <br>
+            <div class="form-check">
+                <label class="form-check-label">
+    <input class="form-check-input" type="radio" name="type" data-id="sprice"checked value="name">
+    Name
+  </label>
+           
+                <label class="form-check-label">
+    <input class="form-check-input" type="radio" name="type" data-id="sname"value="price">
+    Price  
+  </label>      <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+            
+        </form>
+
+    </div>
+    <div class="container">
+        <form action="/productlist" method="POST">
+        <table class="table table-hover">
+            <col width="250">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Cart</th>
+            </tr>
+          </thead>
+          <tbody>
+              
+                  <% if (data.length!==0) {for(var i=0; i < data.length; i++) { %>
+                     <tr>
+                       <td><%= data[i]._id %></td>
+                       <td><%= data[i].name %></td>
+                       <td><%= data[i].description %></td>
+                       <td><%= data[i].price %></td>
+                       <td><input type="checkbox" name="product" value=<%= data[i]._id %>><br>           
+                       </td>
+                     </tr>
+                  <% }} %>              
+          </tbody>
+        </table>
+        <div class="col-sm-offset-5 col-sm-5">
+            <button type="submit" class="btn btn-primary">Add to cart</button>
+            <button type="reset" class="btn btn-primary">Reset</button>
+        </div>
+    </div>
+        </form>
+      </div>
+
+</body>
+<script>
+    $(document).ready(function(){
+        $('#sprice').addClass('none');
+    $(':radio').change(function (event) {
+    var id = $(this).data('id');
+    $('#' + id).addClass('none').siblings().removeClass('none');
+});});
+</script>
+</html>

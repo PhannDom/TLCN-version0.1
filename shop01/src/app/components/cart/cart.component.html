@@ -1,0 +1,45 @@
+<div class="container main-content list">
+    
+        <div class="row show-hide-message" *ngIf="!carts">
+            <div class="alert alert-danger">
+                {{message}}
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <!-- <th>Id</th> -->
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+    
+                    <tr *ngFor="let product of carts">
+                        <!-- <td><%=product._id%></td> -->
+                        <td>{{product.item.name}}</td>
+                        <td>{{product.item.description}}</td>
+                        <td>{{product.item.price}}</td>
+                        <td><a (click)="removeItem(product.item._id)"><span class="glyphicon glyphicon-trash"></span></a></td>
+                    </tr>
+    
+                </tbody>
+            </table>
+            <table class="table table-bordered table-hover">
+                <tbody>
+                    <tr>
+                        <td>Total</td>
+                        <td>{{totalPrice}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            
+            <a (click)="removeAllCart()" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-trash"></span> Remove All</a>
+        </div>
+    </div>
+    <!-- /.container -->

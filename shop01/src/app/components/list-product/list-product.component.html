@@ -1,0 +1,46 @@
+
+
+<div class="container">
+  <div class="row">
+      <div class="col-lg-12">
+          <div class="page-header">
+              <h1>List of Products</h1>
+          </div>
+
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="col-lg-4 ">
+          <input type="search" id="search" value="" class="form-control" placeholder="Search product">
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-lg-12">
+          <table class="table" id="table">
+              <thead>
+                  <tr>
+                      <th>Name</th>
+                      <th>Price</th>
+                      <th>Description</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <!-- Ng for here -->
+
+                  <tr *ngFor="let pro of product">
+                      <td>{{pro.name}}</td>
+                      <td>{{pro.price}}</td>
+                      <td>{{pro.description}}</td>
+                       <!-- <td></td><a href='/add/<%= pro._id %>' class="btn btn-success">Add To Card</a></td> -->
+                        <td><a (click)="addToCart(pro._id)"><span class="glyphicon glyphicon-shopping-cart"></span>Add To Cart</a></td>
+                  </tr>
+              </tbody>
+          </table>
+          <hr>
+      </div>
+  </div>
+    <div>
+        <button type="button" class="btn btn-warning" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><a routerLink="/addproduct">Add Product</a></button>
+    </div>
+</div>
